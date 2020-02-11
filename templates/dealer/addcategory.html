@@ -1,0 +1,43 @@
+{% extends 'dealer/base.html' %}
+{% load static %}
+
+{% block body %}
+<section id="main-content">
+<section class="wrapper">
+  <form method="post" style="padding-top: 1%" enctype="multipart/form-data">
+  	{% csrf_token %}
+    <div class="form-group">
+      <label for="exampleInputEmail1">Category Name</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Category Name" name="name">
+     
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputPassword1">Describe</label>
+      <textarea  class="form-control" placeholder="Enter Category Describe" name="cat_descryption" ></textarea>
+    </div>
+    <div class="form-group ">
+    	<label for="exampleCheck1">Image</label>
+    <input type="file"  class="form-control" name="category_image">
+      
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+  
+{% for display in all_cat %}
+    <tr>
+      
+      {% if display.category_image.url %}
+      <th><img src="{{ display.category_image.url }}"></th>
+      <th>{{ display.category_name }}</th>
+      {% else %}
+      <th> Image </th>
+      {% endif %}
+    </tr>
+{% endfor %}
+
+</section>
+</section>
+
+{%  endblock %}
